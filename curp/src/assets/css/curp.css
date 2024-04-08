@@ -20,14 +20,19 @@ body {
 }
 
 .info {
-    margin-top: -5vh;
-    margin-left: -45vh;
+    margin-top: 5vh;
+    margin-left: 20vh;
     width: 60vh;
     height: 85vh;
     color: white;
-    background-color: #9a3ea2;
     border-radius: 5vh;
+    background-color: #9a3ea2;
 }
+
+.info::content {
+    visibility: visible;
+}
+
 
 .curp {
     font-size: large;
@@ -89,7 +94,11 @@ body {
 
 .input {
     margin-bottom: 3vh;
-    &::-webkit-datetime-edit-day-field:focus{
+
+    &::-webkit-datetime-edit-day-field:focus {
+        background-color: #F8B68D;
+    }
+    &::-webkit-datetime-edit-month-field:focus {
         background-color: #F8B68D;
     }
 }
@@ -108,15 +117,8 @@ body {
     margin-bottom: 1VH;
 }
 
-.generationcode {
-    background-color: #00A4AC;
-    color: white;
-    border: none;
-    border-radius: 20px;
-    padding: 10px 15px;
-    margin-right: 1vh;
-    cursor: pointer;
-    margin-bottom: 1VH;
+.generation:hover{
+    opacity: .8;
 }
 
 .generationQR {

@@ -1,10 +1,9 @@
-import { useState, useEffect } from "react";
+import { useState, useRef } from "react";
 import QRCode from "react-qr-code";
+import ReCAPTCHA from "react-google-recaptcha";
 import "../assets/css/curp.css";
 
 function Curp() {
-  const [validation, setValidation] = useState("");
-  const [randomCode, setRandomCode] = useState("");
   const [nombre, setNombre] = useState("");
   const [apellidoPaterno, setPrimerApellido] = useState("");
   const [apellidoMaterno, setSegundoApellido] = useState("");
@@ -12,6 +11,7 @@ function Curp() {
   const [sexo, setSexo] = useState("");
   const [entidadNacimiento, setEntidadNacimiento] = useState("");
   const [curp, setCurpGenerada] = useState("");
+  const captcha = useRef(false);
 
   const comunes = [
     "MARIA DEL ",
@@ -123,24 +123,11 @@ function Curp() {
     WUEY: "WXEY",
   };
 
-  function generateRandomCode() {
-    return Math.floor(10 + Math.random() * 90);
-  }
-
-  const handleRandomCodeGeneration = () => {
-    const code = generateRandomCode();
-    setRandomCode(code);
-    sessionStorage.setItem("randomCode", code);
-  };
-
-  useEffect(() => {
-    const storedCode = sessionStorage.getItem("randomCode");
-    if (storedCode) {
-      setRandomCode(storedCode);
-    } else {
-      handleRandomCodeGeneration();
+  const captChatHandle = () => {
+    if(captcha.current.getValue()){
+      console.log("El usuario no es un robot")
     }
-  }, []);
+  }
 
   const handleFechaChange = (e) => {
     const value = e.target.value;
@@ -220,7 +207,7 @@ function Curp() {
   const handleSubmit = (event) => {
     event.preventDefault();
 
-    if (validation !== randomCode.toString()) {
+    if (captcha === null) {
       alert("Código de verificación incorrecto.");
       return;
     }
@@ -596,34 +583,16 @@ function Curp() {
                 <option value="CS">Chiapas</option>
               </select>
             </label>
-            <div className="flex">
-              <div>
-                <button
-                  className="generationcode"
-                  type="button"
-                  onClick={handleRandomCodeGeneration}
-                >
-                  {" "}
-                  Generar código
-                </button>
-                <span>{randomCode}</span>
-              </div>
-              <div>
-                <input
-                  className="input"
-                  type="text"
-                  placeholder="Código de verificación"
-                  value={validation}
-                  onChange={(e) => setValidation(e.target.value)}
-                />
-              </div>
-            </div>
-            <button className="generation" type="submit">
+            <ReCAPTCHA 
+                  ref={captcha}
+                  sitekey="6LcoNJUpAAAAAN03ctj2XWw6vZ9iaFII3w5bKKF7" onChange={captChatHandle}
+            />
+            <button className="generation" type="submit" disabled={!captcha.current.valueOf() || captcha.current.getValue()? true : false} >
               Generar CURP
             </button>
           </form>
         </div>
-        <div className="info">
+        <div className="info"  style={{display: curp ? "block" : "none"}}>
           {curp && (
             <div className="curp">
               <p>Datos del solicitante de la curp:</p>
