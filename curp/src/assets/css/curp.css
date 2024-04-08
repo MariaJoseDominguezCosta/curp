@@ -1,0 +1,130 @@
+body {
+    margin: 0;
+    padding: 0;
+}
+
+.container {
+    display: flex;
+    justify-content: space-around;
+}
+
+.containerform {
+    margin-top: -9vh;
+    width: 40%;
+    height: 100vh;
+}
+
+.flex {
+    display: flex;
+    justify-content: space-between;
+}
+
+.info {
+    margin-top: -5vh;
+    margin-left: -45vh;
+    width: 60vh;
+    height: 85vh;
+    color: white;
+    background-color: #9a3ea2;
+    border-radius: 5vh;
+}
+
+.curp {
+    font-size: large;
+    font-weight: bold;
+    text-align: center;
+    margin-top: 7vh;
+}
+
+
+.formLabel {
+    justify-content: center;
+    margin: 10vh;
+}
+
+.form {
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    margin-top: 5vh;
+    width: 60vh;
+    height: 60vh;
+    border-radius: 20px;
+    color: #ffffff;
+}
+
+.title {
+    font-size: 28px;
+    font-weight: 600;
+    margin-bottom: 15px;
+    margin-top: 5vh;
+    position: relative;
+    display: flex;
+    align-items: center;
+    padding-left: 30px;
+    color: #F8B68D;
+}
+
+.title::before {
+    width: 18px;
+    height: 18px;
+}
+
+.title::after {
+    width: 18px;
+    height: 18px;
+    animation: pulse 1s linear infinite;
+}
+
+.title::before,
+.title::after {
+    position: absolute;
+    content: "";
+    height: 16px;
+    width: 16px;
+    border-radius: 50%;
+    left: 0px;
+    background-color: #EE7723;
+}
+
+.input {
+    margin-bottom: 3vh;
+    &::-webkit-datetime-edit-day-field:focus{
+        background-color: #F8B68D;
+    }
+}
+
+.flexdate {
+    display: flex;
+    justify-content: space-between;
+}
+
+.generation {
+    background-color: #F8B68D;
+    border: none;
+    border-radius: 20px;
+    padding: 10px 20px;
+    cursor: pointer;
+    margin-bottom: 1VH;
+}
+
+.generationcode {
+    background-color: #00A4AC;
+    color: white;
+    border: none;
+    border-radius: 20px;
+    padding: 10px 15px;
+    margin-right: 1vh;
+    cursor: pointer;
+    margin-bottom: 1VH;
+}
+
+.generationQR {
+    flex-direction: column;
+    background-color: #F8B68D;
+    border: none;
+    border-radius: 20px;
+    padding: 10px 20px;
+    cursor: pointer;
+    margin-bottom: 1VH;
+}
